@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ktrx3fdrkm74"]
+
+[ext_resource type="Script" uid="uid://d0tg5seovrsvh" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://cc4mv4sqrvdgi" path="res://icon.svg" id="1_7k104"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
+size = Vector2(49, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2p4"]
+size = Vector2(77, 75)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_4gyqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4gyqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.52, 0.52, 1)
+position = Vector2(2.38419e-07, 0)
+scale = Vector2(0.757812, 0.757812)
+texture = ExtResource("1_7k104")
+
+[node name="PlayerDetectArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectArea"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_qi2p4")
+
+[connection signal="body_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_entered"]
